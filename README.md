@@ -27,4 +27,12 @@ I'm a **Informatics Engineering undergraduate student at Institut Teknologi Band
 
 ---
 
+## 👀 Profile Views
+![Profile Views](https://komarev.com/ghpvc/?username=miguelsinaga&color=blue&style=flat-square)
+
+---
+
+![snake gif](https://github.com/miguelsinaga/miguelsinaga/blob/output/github-contribution-grid-snake.svg)
+
+---
 ⭐️ From [miguelsinaga](https://github.com/miguelsinaga)
