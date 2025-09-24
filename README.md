@@ -11,7 +11,7 @@ I'm a **Informatics Engineering undergraduate student at Institut Teknologi Band
 </p>
 
 <p>
-  <img src="https://img.shields.io/badge/Prolog-Blue?style=for-the-badge&logo=prolog&logoColor=white" />
+  <img src="https://img.shields.io/badge/Prolog-%23323330.svg?style=for-the-badge&logo=swi-prolog&logoColor=white" alt="Prolog" />
 </p>
 ---
 
