@@ -5,17 +5,14 @@ I'm a **Informatics Engineering undergraduate student at Institut Teknologi Band
 
 ---
 
-
-
 ## 🛠️ Tech Stacks
 <p>
-  <img src="https://skillicons.dev/icons?i=c,cpp,python,java,figma,haskell" />
+  <img src="https://skillicons.dev/icons?i=c,cpp,python,java,html,css,figma,haskell" />
 </p>
 
 <p>
   <img src="https://img.shields.io/badge/Prolog-Blue?style=for-the-badge&logo=prolog&logoColor=white" />
 </p>
-
 ---
 
 ## 📊 GitHub Stats
