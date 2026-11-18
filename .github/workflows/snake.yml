@@ -4,25 +4,41 @@ on:
   schedule: # jalankan tiap 6 jam
     - cron: "0 */6 * * *"
   workflow_dispatch: # bisa jalan manual juga
+  push: # langsung regenerate setiap ada push ke main
+    branches:
+      - main
 
 permissions:
   contents: write
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
+concurrency:
+  group: snake
+  cancel-in-progress: true
 
-      - name: Generate Snake
-        uses: Platane/snk@v3
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      # dibutuhkan untuk mengambil .github/scripts/style-snake.mjs
+      - name: Checkout repo
+        uses: actions/checkout@v7
+
+      # svg-only jauh lebih cepat daripada Platane/snk biasa (tanpa Docker).
+      # color_dots = 5 warna: sel kosong, lalu kontribusi rendah -> tinggi.
+      - name: Generate snake SVG
+        uses: Platane/snk/svg-only@v3
         with:
-          github_user_name: miguelsinaga
-          outputs: dist/github-contribution-grid-snake.svg
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            build/snake.svg?color_snake=#ff9e64&color_dots=#24283b,#33467c,#3d59a1,#7aa2f7,#bb9af7
+
+      # bingkai kartu, glow, ekor bergradasi, legenda, progress bar membulat
+      - name: Style snake SVG
+        run: node .github/scripts/style-snake.mjs build/snake.svg dist/github-contribution-grid-snake.svg
 
       - name: Push to output branch
-        uses: crazy-max/ghaction-github-pages@v3.1.0
+        uses: crazy-max/ghaction-github-pages@v5
         with:
           target_branch: output
           build_dir: dist

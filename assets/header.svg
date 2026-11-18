@@ -1,0 +1,175 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300" width="1000" height="300" role="img" aria-labelledby="t d">
+  <title id="t">Miguel Sinaga</title>
+  <desc id="d">Informatics Engineering student at Institut Teknologi Bandung. A graph of musical notes is traversed breadth-first from C.</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1a1b27"/>
+      <stop offset="1" stop-color="#13141d"/>
+    </linearGradient>
+    <linearGradient id="name" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7aa2f7"/>
+      <stop offset="1" stop-color="#bb9af7"/>
+    </linearGradient>
+    <radialGradient id="glowA" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#7aa2f7" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#7aa2f7" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#bb9af7" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#bb9af7" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.1" fill="#2a2e42"/>
+    </pattern>
+    <linearGradient id="fade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0.35" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="1"/>
+    </linearGradient>
+    <mask id="dotsMask">
+      <rect width="1000" height="300" fill="url(#fade)"/>
+    </mask>
+    <clipPath id="card">
+      <rect width="1000" height="300" rx="18"/>
+    </clipPath>
+
+    <!-- typed lines: each clip is wiped open, held, then wiped shut -->
+    <clipPath id="type1">
+      <rect x="76" y="232" height="30" width="0">
+        <animate attributeName="width" dur="13.5s" begin="0s" repeatCount="indefinite"
+                 values="0;346;346;0;0" keyTimes="0;0.09;0.27;0.32;1"/>
+      </rect>
+    </clipPath>
+    <clipPath id="type2">
+      <rect x="76" y="232" height="30" width="0">
+        <animate attributeName="width" dur="13.5s" begin="4.5s" repeatCount="indefinite"
+                 values="0;470;470;0;0" keyTimes="0;0.09;0.27;0.32;1"/>
+      </rect>
+    </clipPath>
+    <clipPath id="type3">
+      <rect x="76" y="232" height="30" width="0">
+        <animate attributeName="width" dur="13.5s" begin="9s" repeatCount="indefinite"
+                 values="0;403;403;0;0" keyTimes="0;0.09;0.27;0.32;1"/>
+      </rect>
+    </clipPath>
+  </defs>
+
+  <style>
+    .sans { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Ubuntu, Arial, sans-serif; }
+    .mono { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace; }
+
+    .edge      { fill: none; stroke: #3b4261; stroke-width: 2; }
+    .walk      { fill: none; stroke: #7aa2f7; stroke-width: 2.5; stroke-linecap: round;
+                 stroke-dasharray: 1; stroke-dashoffset: 1; animation: walk 9s linear infinite backwards; }
+    .node      { fill: #1f2335; stroke: #414868; stroke-width: 2; animation: visit 9s ease-out infinite backwards; }
+    .note      { fill: #565f89; font-size: 13px; font-weight: 600; text-anchor: middle;
+                 animation: label 9s ease-out infinite backwards; }
+    .cursor    { fill: #9ece6a; animation: blink 1s steps(1) infinite; }
+
+    @keyframes walk {
+      0%   { stroke-dashoffset: 1; opacity: 1; }
+      4.5% { stroke-dashoffset: 0; opacity: 1; }
+      64%  { stroke-dashoffset: 0; opacity: 1; }
+      76%  { stroke-dashoffset: 0; opacity: 0; }
+      100% { stroke-dashoffset: 1; opacity: 0; }
+    }
+    @keyframes visit {
+      0%   { fill: #1f2335; stroke: #414868; }
+      3%   { fill: #7aa2f7; stroke: #c0caf5; }
+      14%  { fill: #2f4480; stroke: #7aa2f7; }
+      64%  { fill: #2f4480; stroke: #7aa2f7; }
+      76%  { fill: #1f2335; stroke: #414868; }
+      100% { fill: #1f2335; stroke: #414868; }
+    }
+    @keyframes label {
+      0%   { fill: #565f89; }
+      3%   { fill: #ffffff; }
+      64%  { fill: #e6eaff; }
+      76%  { fill: #565f89; }
+      100% { fill: #565f89; }
+    }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .walk { animation: none; stroke-dashoffset: 0; }
+      .node { animation: none; fill: #2f4480; stroke: #7aa2f7; }
+      .note { animation: none; fill: #e6eaff; }
+      .cursor { animation: none; }
+    }
+  </style>
+
+  <g clip-path="url(#card)">
+    <rect width="1000" height="300" fill="url(#bg)"/>
+    <rect width="1000" height="300" fill="url(#dots)" mask="url(#dotsMask)"/>
+    <circle cx="840" cy="110" r="300" fill="url(#glowA)"/>
+    <circle cx="120" cy="320" r="260" fill="url(#glowB)"/>
+
+    <!-- ── text ─────────────────────────────────────────────── -->
+    <text class="mono" x="56" y="78" font-size="14" letter-spacing="3.5" fill="#7aa2f7">HI THERE, I'M</text>
+
+    <text class="sans" x="53" y="150" font-size="68" font-weight="800" letter-spacing="-1.5">
+      <tspan fill="#e6eaff">Miguel</tspan><tspan fill="url(#name)" dx="14">Sinaga</tspan>
+    </text>
+
+    <text class="sans" x="56" y="194" font-size="20" fill="#a9b1d6">Informatics Engineering  ·  Institut Teknologi Bandung</text>
+
+    <text class="mono" x="56" y="253" font-size="16" font-weight="700" fill="#9ece6a">&gt;</text>
+    <g class="mono" font-size="16" fill="#c0caf5">
+      <text x="76" y="253" textLength="346" lengthAdjust="spacing" clip-path="url(#type1)">building where algorithms meet music</text>
+      <text x="76" y="253" textLength="470" lengthAdjust="spacing" clip-path="url(#type2)">graph search · string matching · divide &amp; conquer</text>
+      <text x="76" y="253" textLength="403" lengthAdjust="spacing" clip-path="url(#type3)">C++ · Java · TypeScript · Python · Haskell</text>
+    </g>
+    <rect class="cursor" x="78" y="238" width="9" height="19" rx="1.5">
+      <animate attributeName="x" dur="13.5s" begin="0s" repeatCount="indefinite"
+               values="78;424;424;78;78;548;548;78;78;481;481;78;78"
+               keyTimes="0;0.09;0.27;0.32;0.3333;0.4233;0.6033;0.6533;0.6667;0.7567;0.9367;0.9867;1"/>
+    </rect>
+
+    <!-- ── note graph, visited breadth-first from C ─────────── -->
+    <g>
+      <!-- every edge, dim -->
+      <path class="edge" d="M672 150L760 78"/>
+      <path class="edge" d="M672 150L760 222"/>
+      <path class="edge" d="M760 78L852 52"/>
+      <path class="edge" d="M760 78L856 150"/>
+      <path class="edge" d="M760 222L856 150"/>
+      <path class="edge" d="M760 222L852 248"/>
+      <path class="edge" d="M852 52L940 100"/>
+      <path class="edge" d="M856 150L940 100"/>
+      <path class="edge" d="M856 150L940 200"/>
+      <path class="edge" d="M852 248L940 200"/>
+
+      <!-- BFS tree edges, drawn just before their target node is visited -->
+      <path class="walk" pathLength="1" d="M672 150L760 78"  style="animation-delay:.1s"/>
+      <path class="walk" pathLength="1" d="M672 150L760 222" style="animation-delay:.55s"/>
+      <path class="walk" pathLength="1" d="M760 78L852 52"   style="animation-delay:1s"/>
+      <path class="walk" pathLength="1" d="M760 78L856 150"  style="animation-delay:1.45s"/>
+      <path class="walk" pathLength="1" d="M760 222L852 248" style="animation-delay:1.9s"/>
+      <path class="walk" pathLength="1" d="M852 52L940 100"  style="animation-delay:2.35s"/>
+      <path class="walk" pathLength="1" d="M856 150L940 200" style="animation-delay:2.8s"/>
+
+      <!-- nodes -->
+      <circle class="node" cx="672" cy="150" r="17" style="animation-delay:0s"/>
+      <circle class="node" cx="760" cy="78"  r="17" style="animation-delay:.5s"/>
+      <circle class="node" cx="760" cy="222" r="17" style="animation-delay:.95s"/>
+      <circle class="node" cx="852" cy="52"  r="17" style="animation-delay:1.4s"/>
+      <circle class="node" cx="856" cy="150" r="17" style="animation-delay:1.85s"/>
+      <circle class="node" cx="852" cy="248" r="17" style="animation-delay:2.3s"/>
+      <circle class="node" cx="940" cy="100" r="17" style="animation-delay:2.75s"/>
+      <circle class="node" cx="940" cy="200" r="17" style="animation-delay:3.2s"/>
+
+      <g class="mono">
+        <text class="note" x="672" y="154.5" style="animation-delay:0s">C</text>
+        <text class="note" x="760" y="82.5"  style="animation-delay:.5s">E</text>
+        <text class="note" x="760" y="226.5" style="animation-delay:.95s">G</text>
+        <text class="note" x="852" y="56.5"  style="animation-delay:1.4s">B</text>
+        <text class="note" x="856" y="154.5" style="animation-delay:1.85s">D</text>
+        <text class="note" x="852" y="252.5" style="animation-delay:2.3s">F</text>
+        <text class="note" x="940" y="104.5" style="animation-delay:2.75s">A</text>
+        <text class="note" x="940" y="204.5" style="animation-delay:3.2s">Bb</text>
+      </g>
+    </g>
+  </g>
+
+  <rect x="0.5" y="0.5" width="999" height="299" rx="17.5" fill="none" stroke="#2a2e42"/>
+</svg>
